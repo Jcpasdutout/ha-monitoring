@@ -30,3 +30,20 @@ jobs:
           python-version: "3.13"
       - run: pip install -r requirements_test.txt
       - run: pytest -q
+
+  addon-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: frenck/action-addon-linter@v2
+        with:
+          path: ./monitoring
+
+  addon-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Construire l'add-on (test, sans publication)
+        uses: home-assistant/builder@master
+        with:
+          args: --test --amd64 --target /data/monitoring --image monitoring-{arch} --docker-hub ghcr.io/jcpasdutout

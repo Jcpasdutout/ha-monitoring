@@ -1,0 +1,6 @@
+configuration:
+  reset_admin:
+    name: Reset the administrator account
+    description: Deletes the administrator account at startup (forgotten password). Turn it off once the new account is created.
+network:
+  8080/tcp: Direct access (Monitoring integration, browser)

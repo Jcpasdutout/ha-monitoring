@@ -1,0 +1,6 @@
+configuration:
+  reset_admin:
+    name: Réinitialiser le compte administrateur
+    description: Supprime le compte administrateur au démarrage (mot de passe oublié). Désactivez l'option une fois le nouveau compte créé.
+network:
+  8080/tcp: Accès direct (intégration Monitoring, navigateur)
