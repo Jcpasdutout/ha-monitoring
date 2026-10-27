@@ -46,4 +46,4 @@ jobs:
       - name: Construire l'add-on (test, sans publication)
         uses: home-assistant/builder@master
         with:
-          args: --test --amd64 --target /data/monitoring
+          args: --test --amd64 --target /data/monitoring --image monitoring-{arch} --docker-hub ghcr.io/jcpasdutout
