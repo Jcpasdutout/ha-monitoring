@@ -20,6 +20,20 @@ Chaque sonde devient un **appareil** dans Home Assistant, avec ses capteurs. Qua
 
 **Pour l'ensemble (appareil « Monitoring »)** : nombre de sondes en alerte ou en erreur (avec leur liste), nombre de sondes en erreur, total des mails non lus, un capteur binaire « Problème sur une sonde » et un bouton « Relancer toutes les sondes ».
 
+## Deux façons de faire tourner le monitoring
+
+Ce dépôt contient aussi un **add-on** Home Assistant (dossier `monitoring/`) : le monitoring tourne alors directement dans Home Assistant, avec son tableau de bord dans la barre latérale. Il faut Home Assistant **OS** ou **Supervised** (les installations « Container » et « Core » n'ont pas d'add-ons). Sinon, gardez le monitoring sur sa propre machine (conteneur Proxmox par exemple) et installez seulement l'intégration ci-dessous.
+
+### Installer l'add-on
+
+1. **Paramètres** → **Modules complémentaires** → **Boutique des modules complémentaires** (en bas à droite).
+2. **Trois points** ⋮ en haut à droite → **Dépôts**, collez `https://github.com/Jcpasdutout/ha-monitoring`, cliquez **Ajouter** puis fermez.
+3. Rechargez la page, cherchez **Monitoring**, cliquez **Installer** (la construction prend quelques minutes).
+4. Activez **Afficher dans la barre latérale**, puis **Démarrer**.
+5. Ouvrez **Monitoring** dans la barre latérale et créez le compte administrateur depuis la page **Sondes**.
+
+Pour reprendre les sondes d'une installation existante, voir la documentation de l'add-on (onglet **Documentation**). Avec l'add-on, l'adresse à donner à l'intégration est `http://127.0.0.1:8080`.
+
 ## Prérequis
 
 - Le monitoring en **version 2.1 ou plus récente** (celle qui propose les jetons d'accès).
@@ -49,7 +63,7 @@ Le jeton permet seulement de lire l'état des sondes et de les relancer. Il ne p
 1. **Paramètres** → **Appareils et services** → **Ajouter une intégration** (en bas à droite).
 2. Cherchez **Monitoring** et cliquez dessus.
 3. Remplissez :
-   - **Adresse du monitoring** : `http://192.168.1.241:8080` (l'adresse que vous tapez dans le navigateur) ;
+   - **Adresse du monitoring** : `http://192.168.1.241:8080` (l'adresse que vous tapez dans le navigateur), ou `http://127.0.0.1:8080` avec l'add-on ;
    - **Jeton d'accès** : collez le jeton de l'étape 1.
 4. Validez : les appareils et entités apparaissent tout de suite.
 
