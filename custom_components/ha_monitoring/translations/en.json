@@ -1,0 +1,137 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to the monitoring",
+        "description": "In the monitoring app, open your account menu (top right) > **Jetons d'accès (Home Assistant)**, create a token and paste it here.",
+        "data": {
+          "url": "Monitoring address",
+          "token": "Access token"
+        },
+        "data_description": {
+          "url": "For example http://192.168.1.241:8080",
+          "token": "Starts with mon_. It can only read probe states and re-run probes."
+        }
+      },
+      "reauth_confirm": {
+        "title": "New access token",
+        "description": "The token used for {url} is no longer accepted (it was probably deleted). Create a new one in the monitoring app and paste it here.",
+        "data": {
+          "token": "Access token"
+        }
+      },
+      "reconfigure": {
+        "title": "Change the connection",
+        "description": "Useful if the monitoring IP address changed. Leave the token empty to keep the current one.",
+        "data": {
+          "url": "Monitoring address",
+          "token": "New access token (optional)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot reach the monitoring at this address. Check the IP, port (8080) and that the service is running.",
+      "invalid_auth": "Token rejected: check it was copied completely and has not been deleted.",
+      "not_monitoring": "This address does not answer like the monitoring app, or the app needs an update (version 2.1 or newer).",
+      "unknown": "Unexpected error, check the Home Assistant logs."
+    },
+    "abort": {
+      "already_configured": "This monitoring is already configured (its address and token were updated).",
+      "reauth_successful": "Token updated.",
+      "reconfigure_successful": "Connection updated.",
+      "wrong_instance": "This address belongs to a different monitoring instance."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Monitoring options",
+        "data": {
+          "scan_interval": "Update interval",
+          "mail_preview": "Show sender and subject of latest mails"
+        },
+        "data_description": {
+          "scan_interval": "How often (in seconds) Home Assistant reads the probe states (probes keep their own schedule in the monitoring app).",
+          "mail_preview": "Adds a “derniers_mails” attribute to unread mail sensors (never stored in history)."
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "problem": {
+        "name": "Problem"
+      },
+      "any_problem": {
+        "name": "Problem on a probe"
+      }
+    },
+    "button": {
+      "run": {
+        "name": "Check now"
+      },
+      "refresh_all": {
+        "name": "Run all probes"
+      }
+    },
+    "sensor": {
+      "status": {
+        "name": "Status",
+        "state": {
+          "ok": "OK",
+          "warning": "Warning",
+          "error": "Error",
+          "pending": "Pending",
+          "paused": "Paused"
+        }
+      },
+      "last_check": {
+        "name": "Last check"
+      },
+      "unread": {
+        "name": "Unread mails"
+      },
+      "response_time": {
+        "name": "Response time"
+      },
+      "http_status": {
+        "name": "HTTP status"
+      },
+      "json_value": {
+        "name": "JSON value"
+      },
+      "latency": {
+        "name": "Latency"
+      },
+      "packet_loss": {
+        "name": "Packet loss"
+      },
+      "uptime": {
+        "name": "Uptime"
+      },
+      "problems": {
+        "name": "Probes with a warning or error"
+      },
+      "errors": {
+        "name": "Probes in error"
+      },
+      "unread_total": {
+        "name": "Unread mails (total)"
+      },
+      "probe_count": {
+        "name": "Probe count"
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_auth": {
+      "message": "The monitoring access token was rejected."
+    },
+    "cannot_connect": {
+      "message": "Monitoring unreachable: {error}"
+    },
+    "action_failed": {
+      "message": "The monitoring could not run the action: {error}"
+    }
+  }
+}

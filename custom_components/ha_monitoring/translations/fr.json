@@ -1,0 +1,137 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connexion au monitoring",
+        "description": "Dans le monitoring, ouvrez le menu de votre compte (en haut à droite) > **Jetons d'accès (Home Assistant)**, créez un jeton et collez-le ici.",
+        "data": {
+          "url": "Adresse du monitoring",
+          "token": "Jeton d'accès"
+        },
+        "data_description": {
+          "url": "Par exemple http://192.168.1.241:8080",
+          "token": "Commence par mon_. Il ne permet que de lire l'état des sondes et de les relancer."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Nouveau jeton d'accès",
+        "description": "Le jeton utilisé pour {url} n'est plus accepté (il a sans doute été supprimé). Créez-en un nouveau dans le monitoring et collez-le ici.",
+        "data": {
+          "token": "Jeton d'accès"
+        }
+      },
+      "reconfigure": {
+        "title": "Modifier la connexion",
+        "description": "Utile si l'adresse IP du monitoring a changé. Laissez le jeton vide pour garder l'actuel.",
+        "data": {
+          "url": "Adresse du monitoring",
+          "token": "Nouveau jeton d'accès (facultatif)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Impossible de joindre le monitoring à cette adresse. Vérifiez l'IP, le port (8080) et que le service tourne.",
+      "invalid_auth": "Jeton refusé : vérifiez qu'il est copié en entier et qu'il n'a pas été supprimé.",
+      "not_monitoring": "Cette adresse ne répond pas comme le monitoring, ou celui-ci doit être mis à jour (version 2.1 ou plus récente).",
+      "unknown": "Erreur inattendue, consultez les journaux de Home Assistant."
+    },
+    "abort": {
+      "already_configured": "Ce monitoring est déjà configuré (son adresse et son jeton ont été mis à jour).",
+      "reauth_successful": "Jeton mis à jour.",
+      "reconfigure_successful": "Connexion mise à jour.",
+      "wrong_instance": "Cette adresse correspond à un autre monitoring que celui configuré."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Options du monitoring",
+        "data": {
+          "scan_interval": "Fréquence de mise à jour",
+          "mail_preview": "Afficher l'expéditeur et l'objet des derniers mails"
+        },
+        "data_description": {
+          "scan_interval": "Toutes les combien de secondes Home Assistant relit l'état des sondes (les sondes gardent leur propre rythme dans le monitoring).",
+          "mail_preview": "Ajoute un attribut « derniers_mails » aux capteurs de mails non lus (jamais enregistré dans l'historique)."
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "problem": {
+        "name": "Problème"
+      },
+      "any_problem": {
+        "name": "Problème sur une sonde"
+      }
+    },
+    "button": {
+      "run": {
+        "name": "Vérifier maintenant"
+      },
+      "refresh_all": {
+        "name": "Relancer toutes les sondes"
+      }
+    },
+    "sensor": {
+      "status": {
+        "name": "État",
+        "state": {
+          "ok": "OK",
+          "warning": "Alerte",
+          "error": "Erreur",
+          "pending": "En attente",
+          "paused": "En pause"
+        }
+      },
+      "last_check": {
+        "name": "Dernière vérification"
+      },
+      "unread": {
+        "name": "Mails non lus"
+      },
+      "response_time": {
+        "name": "Temps de réponse"
+      },
+      "http_status": {
+        "name": "Code HTTP"
+      },
+      "json_value": {
+        "name": "Valeur JSON"
+      },
+      "latency": {
+        "name": "Latence"
+      },
+      "packet_loss": {
+        "name": "Pertes"
+      },
+      "uptime": {
+        "name": "Allumée depuis"
+      },
+      "problems": {
+        "name": "Sondes en alerte ou en erreur"
+      },
+      "errors": {
+        "name": "Sondes en erreur"
+      },
+      "unread_total": {
+        "name": "Mails non lus (total)"
+      },
+      "probe_count": {
+        "name": "Nombre de sondes"
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_auth": {
+      "message": "Le jeton d'accès au monitoring est refusé."
+    },
+    "cannot_connect": {
+      "message": "Monitoring injoignable : {error}"
+    },
+    "action_failed": {
+      "message": "Le monitoring n'a pas pu exécuter l'action : {error}"
+    }
+  }
+}
