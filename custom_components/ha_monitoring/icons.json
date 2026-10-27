@@ -1,0 +1,61 @@
+{
+  "entity": {
+    "binary_sensor": {
+      "any_problem": {
+        "default": "mdi:alert-circle-outline"
+      }
+    },
+    "button": {
+      "run": {
+        "default": "mdi:play-circle-outline"
+      },
+      "refresh_all": {
+        "default": "mdi:refresh"
+      }
+    },
+    "sensor": {
+      "status": {
+        "default": "mdi:check-circle-outline",
+        "state": {
+          "warning": "mdi:alert-outline",
+          "error": "mdi:close-circle-outline",
+          "pending": "mdi:timer-sand",
+          "paused": "mdi:pause-circle-outline"
+        }
+      },
+      "unread": {
+        "default": "mdi:email-outline"
+      },
+      "unread_total": {
+        "default": "mdi:email-multiple-outline"
+      },
+      "response_time": {
+        "default": "mdi:timer-outline"
+      },
+      "latency": {
+        "default": "mdi:lan-pending"
+      },
+      "packet_loss": {
+        "default": "mdi:lan-disconnect"
+      },
+      "http_status": {
+        "default": "mdi:web"
+      },
+      "json_value": {
+        "default": "mdi:code-json"
+      },
+      "uptime": {
+        "default": "mdi:clock-start"
+      },
+      "problems": {
+        "default": "mdi:alert-outline"
+      },
+      "errors": {
+        "default": "mdi:close-circle-outline"
+      },
+      "probe_count": {
+        "default": "mdi:counter"
+      }
+    }
+  }
+}
