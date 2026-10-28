@@ -1,5 +1,5 @@
 name: Monitoring
-version: "2.5.1"
+version: "2.5.2"
 slug: monitoring
 description: Supervise des boîtes mail, des API, des pings et des équipements SNMP, avec un tableau de bord dans la barre latérale.
 url: https://github.com/Jcpasdutout/ha-monitoring
@@ -9,6 +9,8 @@ arch:
 init: false
 discovery:
   - ha_monitoring
+# Nécessaire pour lire le nom d'hôte de l'add-on (/addons/self/info) avant l'annonce.
+hassio_api: true
 ingress: true
 ingress_port: 8080
 panel_icon: mdi:monitor-dashboard

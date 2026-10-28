@@ -1,5 +1,9 @@
 # Journal des modifications
 
+## 2.5.2
+
+- Découverte automatique : correctif pour l'erreur « HTTP Error 403: Forbidden » (accès à l'API du Supervisor, nom d'hôte de secours) et message d'erreur plus précis dans le journal.
+
 ## 2.5.1
 
 - Fond transparent : l'image ou le dégradé de fond du thème Home Assistant (`lovelace-background`) s'affiche maintenant derrière le monitoring, plus seulement la couleur unie.
