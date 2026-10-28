@@ -8,9 +8,27 @@ import urllib.request
 
 TOKEN_FILE = "/data/ha_token"
 SUPERVISOR = "http://supervisor"
-HEADERS = {"Authorization": f"Bearer {os.environ.get('SUPERVISOR_TOKEN', '')}"}
-if not os.environ.get("SUPERVISOR_TOKEN"):
-    print("Découverte : variable SUPERVISOR_TOKEN absente, le Supervisor refusera l'annonce.")
+
+
+def supervisor_token():
+    """Jeton donné par le Supervisor. L'image de base (s6-overlay) le retire de l'environnement
+    du script de démarrage, mais le garde dans /run/s6/container_environment."""
+    token = os.environ.get("SUPERVISOR_TOKEN", "")
+    for path in ("/run/s6/container_environment/SUPERVISOR_TOKEN",
+                 "/var/run/s6/container_environment/SUPERVISOR_TOKEN"):
+        if token:
+            break
+        try:
+            with open(path, encoding="utf-8") as f:
+                token = f.read().strip()
+        except OSError:
+            pass
+    if not token:
+        print("Découverte : jeton SUPERVISOR_TOKEN introuvable, le Supervisor refusera l'annonce.")
+    return token
+
+
+HEADERS = {"Authorization": f"Bearer {supervisor_token()}"}
 
 
 def supervisor(method, path, body=None):

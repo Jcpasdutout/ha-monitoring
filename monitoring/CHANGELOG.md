@@ -1,5 +1,9 @@
 # Journal des modifications
 
+## 2.6.1
+
+- Découverte automatique : le jeton du Supervisor est maintenant retrouvé (l'image de base le retirait de l'environnement), ce qui corrige le refus « 403 Forbidden ».
+
 ## 2.6.0
 
 - Les numéros de version de l'add-on et de l'application s'affichent en bas du menu roue crantée.
