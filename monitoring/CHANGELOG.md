@@ -1,5 +1,9 @@
 # Journal des modifications
 
+## 2.5.0
+
+- Le bouton de thème passe en cycle : fond clair → sombre → transparent. Le fond transparent laisse voir le fond du thème Home Assistant et suit automatiquement son mode clair ou sombre.
+
 ## 2.4.1
 
 - Le menu flottant s'affiche dès que le monitoring est intégré dans HA (panneau de l'add-on, ou carte/panneau « page web »).
