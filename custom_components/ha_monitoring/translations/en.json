@@ -1,5 +1,6 @@
 {
   "config": {
+    "flow_title": "{addon}",
     "step": {
       "user": {
         "title": "Connect to the monitoring",
@@ -12,6 +13,10 @@
           "url": "For example http://192.168.1.241:8080",
           "token": "Starts with mon_. It can only read probe states and re-run probes."
         }
+      },
+      "hassio_confirm": {
+        "title": "Monitoring (add-on)",
+        "description": "The Monitoring add-on is running on this Home Assistant. Do you want to add its probes as entities? No address or token needed."
       },
       "reauth_confirm": {
         "title": "New access token",
@@ -39,7 +44,11 @@
       "already_configured": "This monitoring is already configured (its address and token were updated).",
       "reauth_successful": "Token updated.",
       "reconfigure_successful": "Connection updated.",
-      "wrong_instance": "This address belongs to a different monitoring instance."
+      "wrong_instance": "This address belongs to a different monitoring instance.",
+      "cannot_connect": "Cannot reach the Monitoring add-on: check that it is started.",
+      "invalid_auth": "The token provided by the add-on was rejected: restart the add-on.",
+      "not_monitoring": "The Monitoring add-on needs to be updated.",
+      "unknown": "Unexpected error, check the Home Assistant logs."
     }
   },
   "options": {

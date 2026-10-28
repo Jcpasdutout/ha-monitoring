@@ -22,7 +22,9 @@ Le compte administrateur et les jetons d'accès sont repris avec.
 
 ## Accès direct et intégration Home Assistant
 
-Le port **8080** de la machine Home Assistant donne aussi accès au monitoring (par exemple `http://homeassistant.local:8080`). C'est l'adresse à donner à l'intégration **Monitoring** (HACS) : dans l'intégration, indiquez `http://127.0.0.1:8080` et un jeton créé dans le menu de votre identifiant, **Jetons d'accès (Home Assistant)**.
+Pour avoir les sondes comme entités dans Home Assistant, installez aussi l'intégration **Monitoring** via HACS (même dépôt). L'add-on se signale tout seul : après le redémarrage de Home Assistant, **Paramètres** → **Appareils et services** affiche « Nouvel appareil découvert : Monitoring ». Cliquez **Ajouter**, puis **Valider** : il n'y a ni adresse ni jeton à saisir. Un jeton « Home Assistant (add-on) » est créé pour cela dans le monitoring ; si vous le supprimez, il est recréé au prochain démarrage de l'add-on.
+
+Le port **8080** de la machine Home Assistant donne aussi accès au monitoring (par exemple `http://homeassistant.local:8080`). Il n'est plus nécessaire à l'intégration.
 
 Pour changer ce port, ou le fermer si vous n'utilisez pas l'intégration, allez dans l'onglet **Configuration** de l'add-on, section **Réseau**.
 

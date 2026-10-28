@@ -32,7 +32,7 @@ Ce dépôt contient aussi un **add-on** Home Assistant (dossier `monitoring/`) :
 4. Activez **Afficher dans la barre latérale**, puis **Démarrer**.
 5. Ouvrez **Monitoring** dans la barre latérale et créez le compte administrateur depuis la page **Sondes**.
 
-Pour reprendre les sondes d'une installation existante, voir la documentation de l'add-on (onglet **Documentation**). Avec l'add-on, l'adresse à donner à l'intégration est `http://127.0.0.1:8080`.
+Pour reprendre les sondes d'une installation existante, voir la documentation de l'add-on (onglet **Documentation**). Avec l'add-on, l'intégration n'a rien à saisir : une fois installée via HACS (étape 2 ci-dessous) et Home Assistant redémarré, **Paramètres** → **Appareils et services** propose « Monitoring » dans **Découverts**. Cliquez **Ajouter** puis **Valider**, et passez les étapes 1 et 3.
 
 ## Prérequis
 

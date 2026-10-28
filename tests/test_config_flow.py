@@ -6,6 +6,7 @@ from homeassistant import config_entries
 from homeassistant.const import CONF_TOKEN, CONF_URL
 from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResultType
+from homeassistant.helpers.service_info.hassio import HassioServiceInfo
 import aiohttp
 
 from custom_components.ha_monitoring.const import (
@@ -130,3 +131,49 @@ async def test_options(hass: HomeAssistant, entry, mock_api) -> None:
     assert coordinator.update_interval.total_seconds() == 60
     state = hass.states.get("sensor.boite_free_mails_non_lus")
     assert "derniers_mails" not in state.attributes
+
+
+ADDON_URL = "http://abcd1234-monitoring:8080"
+DISCOVERY = HassioServiceInfo(
+    config={"host": "abcd1234-monitoring", "port": 8080, "token": "mon_addon"},
+    name="Monitoring",
+    slug="abcd1234_monitoring",
+    uuid="1234",
+)
+
+
+async def _discover(hass: HomeAssistant):
+    return await hass.config_entries.flow.async_init(
+        DOMAIN, context={"source": config_entries.SOURCE_HASSIO}, data=DISCOVERY
+    )
+
+
+async def test_hassio_discovery(hass: HomeAssistant, aioclient_mock) -> None:
+    """L'add-on s'annonce : un clic suffit, avec son adresse et son jeton."""
+    aioclient_mock.get(f"{ADDON_URL}/api/auth", json=AUTH)
+    result = await _discover(hass)
+    assert result["type"] is FlowResultType.FORM
+    assert result["step_id"] == "hassio_confirm"
+    result = await hass.config_entries.flow.async_configure(result["flow_id"], {})
+    assert result["type"] is FlowResultType.CREATE_ENTRY
+    assert result["title"] == "Monitoring (add-on)"
+    assert result["data"] == {CONF_URL: ADDON_URL, CONF_TOKEN: "mon_addon"}
+    assert result["result"].unique_id == INSTANCE
+    assert aioclient_mock.mock_calls[0][3]["Authorization"] == "Bearer mon_addon"
+
+
+async def test_hassio_discovery_updates_entry(hass: HomeAssistant, entry, aioclient_mock) -> None:
+    """Déjà ajouté à la main : l'entrée passe à l'adresse et au jeton de l'add-on."""
+    entry.add_to_hass(hass)
+    aioclient_mock.get(f"{ADDON_URL}/api/auth", json=AUTH)
+    result = await _discover(hass)
+    assert result["type"] is FlowResultType.ABORT
+    assert result["reason"] == "already_configured"
+    assert entry.data == {CONF_URL: ADDON_URL, CONF_TOKEN: "mon_addon"}
+
+
+async def test_hassio_discovery_cannot_connect(hass: HomeAssistant, aioclient_mock) -> None:
+    aioclient_mock.get(f"{ADDON_URL}/api/auth", exc=aiohttp.ClientConnectionError())
+    result = await _discover(hass)
+    assert result["type"] is FlowResultType.ABORT
+    assert result["reason"] == "cannot_connect"
