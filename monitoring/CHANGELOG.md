@@ -1,5 +1,9 @@
 # Journal des modifications
 
+## 2.6.0
+
+- Les numéros de version de l'add-on et de l'application s'affichent en bas du menu roue crantée.
+
 ## 2.5.2
 
 - Découverte automatique : correctif pour l'erreur « HTTP Error 403: Forbidden » (accès à l'API du Supervisor, nom d'hôte de secours) et message d'erreur plus précis dans le journal.
