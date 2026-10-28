@@ -1,5 +1,9 @@
 # Journal des modifications
 
+## 2.4.0
+
+- Un seul bandeau en haut : dans le panneau de l'add-on, le menu du monitoring (onglets, Actualiser, thème, réglages, compte) devient une petite barre flottante en bas à droite, sous le bandeau de Home Assistant.
+
 ## 2.3.0
 
 - L'intégration Monitoring détecte l'add-on toute seule : Home Assistant propose de l'ajouter en un clic, sans adresse ni jeton à saisir (jeton « Home Assistant (add-on) » créé automatiquement).
