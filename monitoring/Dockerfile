@@ -3,6 +3,9 @@ FROM $BUILD_FROM
 
 # Commit (ou tag) de https://github.com/Jcpasdutout/monitoring à installer, fixé dans build.yaml.
 ARG MONITORING_REF
+# Version de l'add-on (config.yaml), fournie par Home Assistant à la construction : affichée dans l'interface.
+ARG BUILD_VERSION
+ENV MONITORING_ADDON_VERSION=${BUILD_VERSION}
 
 # Python (bibliothèque standard uniquement) et la commande ping pour les sondes ICMP.
 RUN apk add --no-cache python3 iputils \
