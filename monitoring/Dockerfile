@@ -12,7 +12,7 @@ RUN apk add --no-cache python3 iputils \
     && rm -rf /opt/monitoring/web /opt/monitoring/deploy \
     && test -f /opt/monitoring/static/index.html
 
-COPY run.sh /run.sh
+COPY run.sh discovery.py /
 RUN chmod a+x /run.sh
 
 CMD ["/run.sh"]

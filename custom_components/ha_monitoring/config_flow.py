@@ -1,4 +1,4 @@
-"""Formulaires de configuration : adresse + jeton, puis options."""
+"""Formulaires de configuration : adresse + jeton (ou découverte de l'add-on), puis options."""
 
 from __future__ import annotations
 
@@ -25,6 +25,7 @@ from homeassistant.helpers.selector import (
     TextSelectorConfig,
     TextSelectorType,
 )
+from homeassistant.helpers.service_info.hassio import HassioServiceInfo
 
 from .api import (
     MonitoringApi,
@@ -52,6 +53,8 @@ class MonitoringConfigFlow(ConfigFlow, domain=DOMAIN):
     """Ajout du monitoring depuis Paramètres > Appareils et services."""
 
     VERSION = 1
+
+    _discovered: dict[str, str]
 
     async def _validate(self, url: str, token: str) -> tuple[dict[str, Any] | None, dict[str, str]]:
         """Teste l'adresse et le jeton ; renvoie (infos, erreurs)."""
@@ -97,6 +100,33 @@ class MonitoringConfigFlow(ConfigFlow, domain=DOMAIN):
             ),
             errors=errors,
         )
+
+    async def async_step_hassio(
+        self, discovery_info: HassioServiceInfo
+    ) -> ConfigFlowResult:
+        """L'add-on Monitoring s'est annoncé avec son adresse et un jeton prêt à l'emploi."""
+        config = discovery_info.config
+        url = f"http://{config['host']}:{config['port']}"
+        token = config["token"]
+        info, errors = await self._validate(url, token)
+        if not info:
+            return self.async_abort(reason=errors["base"])
+        await self.async_set_unique_id(info["instance_id"])
+        # Déjà configuré (à la main ou par une découverte précédente) : on passe à
+        # l'adresse et au jeton de l'add-on, ce qui suit aussi un jeton recréé.
+        self._abort_if_unique_id_configured(updates={CONF_URL: url, CONF_TOKEN: token})
+        self._discovered = {CONF_URL: url, CONF_TOKEN: token}
+        self.context["title_placeholders"] = {"addon": discovery_info.name}
+        return await self.async_step_hassio_confirm()
+
+    async def async_step_hassio_confirm(
+        self, user_input: dict[str, Any] | None = None
+    ) -> ConfigFlowResult:
+        if user_input is not None:
+            return self.async_create_entry(
+                title="Monitoring (add-on)", data=self._discovered
+            )
+        return self.async_show_form(step_id="hassio_confirm")
 
     async def async_step_reauth(
         self, entry_data: Mapping[str, Any]

@@ -1,5 +1,6 @@
 {
   "config": {
+    "flow_title": "{addon}",
     "step": {
       "user": {
         "title": "Connexion au monitoring",
@@ -12,6 +13,10 @@
           "url": "Par exemple http://192.168.1.241:8080",
           "token": "Commence par mon_. Il ne permet que de lire l'état des sondes et de les relancer."
         }
+      },
+      "hassio_confirm": {
+        "title": "Monitoring (add-on)",
+        "description": "L'add-on Monitoring tourne sur ce Home Assistant. Voulez-vous ajouter ses sondes comme entités ? Aucune adresse ni jeton à saisir."
       },
       "reauth_confirm": {
         "title": "Nouveau jeton d'accès",
@@ -39,7 +44,11 @@
       "already_configured": "Ce monitoring est déjà configuré (son adresse et son jeton ont été mis à jour).",
       "reauth_successful": "Jeton mis à jour.",
       "reconfigure_successful": "Connexion mise à jour.",
-      "wrong_instance": "Cette adresse correspond à un autre monitoring que celui configuré."
+      "wrong_instance": "Cette adresse correspond à un autre monitoring que celui configuré.",
+      "cannot_connect": "Impossible de joindre l'add-on Monitoring : vérifiez qu'il est démarré.",
+      "invalid_auth": "Le jeton fourni par l'add-on est refusé : redémarrez l'add-on.",
+      "not_monitoring": "L'add-on Monitoring doit être mis à jour.",
+      "unknown": "Erreur inattendue, consultez les journaux de Home Assistant."
     }
   },
   "options": {

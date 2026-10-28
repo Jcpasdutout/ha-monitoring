@@ -17,5 +17,8 @@ if [ -f "$OPTIONS" ] && python3 -c "import json,sys; sys.exit(0 if json.load(ope
 fi
 
 export MONITORING_DATA=/data MONITORING_HOST=0.0.0.0 MONITORING_PORT=8080
+# Jeton réservé à l'intégration Home Assistant, transmis par la découverte (discovery.py).
+export MONITORING_TOKEN_FILE=/data/ha_token MONITORING_TOKEN_NAME="Home Assistant (add-on)"
+python3 /discovery.py &
 cd /opt/monitoring
 exec python3 server.py $ARGS
