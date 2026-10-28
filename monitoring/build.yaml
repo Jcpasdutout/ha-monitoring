@@ -3,4 +3,4 @@ build_from:
   amd64: ghcr.io/home-assistant/amd64-base:3.21
 args:
   # Commit de https://github.com/Jcpasdutout/monitoring à installer (version de l'application).
-  MONITORING_REF: d836f30393f54e7250dfbe3de7efc10daa15cf99
+  MONITORING_REF: 4fee258a2df19d1344ca1d292ead4a392b275940

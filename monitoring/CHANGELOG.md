@@ -2,6 +2,7 @@
 
 ## 2.4.1
 
+- Le menu flottant s'affiche dès que le monitoring est intégré dans HA (panneau de l'add-on, ou carte/panneau « page web »).
 - Après une mise à jour, la nouvelle interface s'affiche tout de suite (la page n'est plus gardée en cache par le navigateur).
 
 ## 2.4.0
