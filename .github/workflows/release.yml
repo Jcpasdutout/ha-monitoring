@@ -5,7 +5,7 @@ name: Release
 on:
   push:
     branches: [main]
-    paths: [custom_components/ha_monitoring/manifest.json]
+    paths: [custom_components/ha_monitoring/manifest.json, .github/workflows/release.yml]
   workflow_dispatch:
 
 permissions:
