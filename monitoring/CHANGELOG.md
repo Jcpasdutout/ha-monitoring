@@ -1,5 +1,9 @@
 # Journal des modifications
 
+## 2.5.1
+
+- Fond transparent : l'image ou le dégradé de fond du thème Home Assistant (`lovelace-background`) s'affiche maintenant derrière le monitoring, plus seulement la couleur unie.
+
 ## 2.5.0
 
 - Le bouton de thème passe en cycle : fond clair → sombre → transparent. Le fond transparent laisse voir le fond du thème Home Assistant et suit automatiquement son mode clair ou sombre.
