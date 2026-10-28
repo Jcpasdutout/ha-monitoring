@@ -1,5 +1,9 @@
 # Journal des modifications
 
+## 2.4.1
+
+- Après une mise à jour, la nouvelle interface s'affiche tout de suite (la page n'est plus gardée en cache par le navigateur).
+
 ## 2.4.0
 
 - Un seul bandeau en haut : dans le panneau de l'add-on, le menu du monitoring (onglets, Actualiser, thème, réglages, compte) devient une petite barre flottante en bas à droite, sous le bandeau de Home Assistant.
