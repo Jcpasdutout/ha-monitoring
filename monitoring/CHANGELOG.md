@@ -1,5 +1,9 @@
 # Journal des modifications
 
+## 2.8.0
+
+- Image de fond au choix dans le menu roue crantée : sept fonds intégrés (clairs et sombres) ou ta propre image, avec un voile réglable et des cartes en verre dépoli. En mode transparent, le fond du thème Home Assistant reste affiché sauf si « Garder l'image en mode transparent » est coché.
+
 ## 2.7.0
 
 - Nouveau bouton dans le menu flottant (visible seulement dans Home Assistant) : plein écran, qui masque la barre latérale et le bandeau de Home Assistant, ou retour à l'affichage normal. Le choix est mémorisé.
