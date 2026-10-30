@@ -1,6 +1,7 @@
-// Panneau « Monitoring » (/monitoring) : affiche l'add-on via l'Ingress, comme le panneau
-// d'origine de l'add-on, mais à une adresse courte. Reprend ce que fait Home Assistant pour
-// ses add-ons : ouvrir une session Ingress, la poser en cookie, la prolonger chaque minute.
+// Panneau « Monitoring » (/monitoring) pour les versions de Home Assistant sans vue « app »
+// réutilisable : affiche l'add-on via l'Ingress, comme le panneau d'origine de l'add-on.
+// Reprend ce que fait Home Assistant pour ses add-ons : ouvrir une session Ingress, la poser
+// en cookie, la prolonger chaque minute.
 
 const VALIDATE_EVERY = 60 * 1000;
 const MENU_ICON =
@@ -26,7 +27,7 @@ class MonitoringPanel extends HTMLElement {
           border-bottom: var(--app-header-border-bottom, none);
           font-size: 20px;
         }
-        :host([narrow]) .header { display: flex; }
+        :host([narrow]) .header, :host([menu]) .header { display: flex; }
         button {
           width: 48px; height: 48px; border: 0; border-radius: 50%; padding: 12px;
           background: none; color: inherit; cursor: pointer;
@@ -62,6 +63,8 @@ class MonitoringPanel extends HTMLElement {
 
   set hass(hass) {
     this._hass = hass;
+    // Barre latérale masquée (profil HA) : comme sur téléphone, il faut le bouton du menu.
+    this.toggleAttribute("menu", hass.dockedSidebar === "always_hidden");
     this._start();
   }
 
