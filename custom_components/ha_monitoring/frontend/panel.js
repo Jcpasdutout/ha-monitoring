@@ -13,7 +13,11 @@ class MonitoringPanel extends HTMLElement {
     this._timer = null;
     this.attachShadow({ mode: "open" }).innerHTML = `
       <style>
-        :host { display: flex; flex-direction: column; height: 100%; }
+        :host {
+          /* Le conteneur du panneau n'a pas de hauteur fixe : on prend celle de la fenêtre. */
+          display: flex; flex-direction: column;
+          height: 100vh; height: 100dvh; overflow: hidden;
+        }
         .header {
           display: none; align-items: center; gap: 12px; flex: none;
           height: var(--header-height, 56px); padding: 0 12px 0 4px;
@@ -30,7 +34,7 @@ class MonitoringPanel extends HTMLElement {
         button:hover { background: rgba(127, 127, 127, 0.15); }
         svg { width: 24px; height: 24px; fill: currentColor; display: block; }
         iframe {
-          flex: 1; width: 100%; border: 0; display: block;
+          flex: 1 1 auto; min-height: 0; height: 100%; width: 100%; border: 0; display: block;
           background-color: var(--primary-background-color);
         }
         .message { margin: 24px; color: var(--primary-text-color); }
