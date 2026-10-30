@@ -1,5 +1,9 @@
 # Journal des modifications
 
+## 2.9.2
+
+- Dans Home Assistant, la page Sondes n'affiche plus d'ascenseurs inutiles (les interrupteurs « Active » débordaient de la page).
+
 ## 2.9.1
 
 - Hors Home Assistant, la barre du haut n'affiche plus le logo ni le titre « Monitoring » (aucun changement dans HA).
