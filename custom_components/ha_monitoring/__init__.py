@@ -12,6 +12,7 @@ from .api import MonitoringApi, MonitoringAuthError, MonitoringError
 from .const import DOMAIN
 from .coordinator import MonitoringConfigEntry, MonitoringCoordinator, MonitoringData
 from .entity import hub_device_info
+from .panel import async_remove_panel, async_restore_addon_panel, async_setup_panel
 
 PLATFORMS: list[Platform] = [Platform.BINARY_SENSOR, Platform.BUTTON, Platform.SENSOR]
 
@@ -44,9 +45,16 @@ async def async_setup_entry(hass: HomeAssistant, entry: MonitoringConfigEntry) -
     coordinator.remove_stale_devices()
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
+    await async_setup_panel(hass, entry)
     return True
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: MonitoringConfigEntry) -> bool:
     """Retire l'intégration."""
+    async_remove_panel(hass, entry)
     return await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
+
+
+async def async_remove_entry(hass: HomeAssistant, entry: MonitoringConfigEntry) -> None:
+    """Intégration supprimée : l'add-on retrouve son propre panneau."""
+    await async_restore_addon_panel(hass, entry)

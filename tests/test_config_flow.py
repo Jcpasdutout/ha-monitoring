@@ -11,6 +11,7 @@ import aiohttp
 
 from custom_components.ha_monitoring.const import (
     CONF_MAIL_PREVIEW,
+    CONF_PANEL,
     CONF_SCAN_INTERVAL,
     DOMAIN,
 )
@@ -123,10 +124,10 @@ async def test_options(hass: HomeAssistant, entry, mock_api) -> None:
     result = await hass.config_entries.options.async_init(entry.entry_id)
     assert result["type"] is FlowResultType.FORM
     result = await hass.config_entries.options.async_configure(
-        result["flow_id"], {CONF_SCAN_INTERVAL: 60.0, CONF_MAIL_PREVIEW: False}
+        result["flow_id"], {CONF_SCAN_INTERVAL: 60.0, CONF_MAIL_PREVIEW: False, CONF_PANEL: True}
     )
     await hass.async_block_till_done()
-    assert entry.options == {CONF_SCAN_INTERVAL: 60, CONF_MAIL_PREVIEW: False}
+    assert entry.options == {CONF_SCAN_INTERVAL: 60, CONF_MAIL_PREVIEW: False, CONF_PANEL: True}
     coordinator = entry.runtime_data.coordinator
     assert coordinator.update_interval.total_seconds() == 60
     state = hass.states.get("sensor.boite_free_mails_non_lus")
