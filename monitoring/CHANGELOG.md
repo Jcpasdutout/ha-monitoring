@@ -1,5 +1,9 @@
 # Journal des modifications
 
+## 2.7.0
+
+- Nouveau bouton dans le menu flottant (visible seulement dans Home Assistant) : plein écran, qui masque la barre latérale et le bandeau de Home Assistant, ou retour à l'affichage normal. Le choix est mémorisé.
+
 ## 2.6.1
 
 - Découverte automatique : le jeton du Supervisor est maintenant retrouvé (l'image de base le retirait de l'environnement), ce qui corrige le refus « 403 Forbidden ».
