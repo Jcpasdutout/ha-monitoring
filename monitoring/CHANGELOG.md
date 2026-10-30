@@ -1,5 +1,9 @@
 # Journal des modifications
 
+## 2.9.1
+
+- Hors Home Assistant, la barre du haut n'affiche plus le logo ni le titre « Monitoring » (aucun changement dans HA).
+
 ## 2.9.0
 
 - Le choix du thème passe dans le menu roue crantée : Sombre, Clair, Image ou Transparent. La galerie d'images n'apparaît qu'en mode Image, et recliquer sur l'image choisie bascule entre sa version claire et sa version sombre.
