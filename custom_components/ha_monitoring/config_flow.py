@@ -37,8 +37,10 @@ from .api import (
 )
 from .const import (
     CONF_MAIL_PREVIEW,
+    CONF_PANEL,
     CONF_SCAN_INTERVAL,
     DEFAULT_MAIL_PREVIEW,
+    DEFAULT_PANEL,
     DEFAULT_SCAN_INTERVAL,
     DOMAIN,
     MIN_SCAN_INTERVAL,
@@ -194,7 +196,7 @@ class MonitoringConfigFlow(ConfigFlow, domain=DOMAIN):
 
 
 class MonitoringOptionsFlow(OptionsFlowWithReload):
-    """Options : fréquence de mise à jour et aperçu des mails."""
+    """Options : fréquence de mise à jour, aperçu des mails et panneau /monitoring."""
 
     async def async_step_init(
         self, user_input: dict[str, Any] | None = None
@@ -217,11 +219,13 @@ class MonitoringOptionsFlow(OptionsFlowWithReload):
                             )
                         ),
                         vol.Required(CONF_MAIL_PREVIEW): BooleanSelector(),
+                        vol.Required(CONF_PANEL): BooleanSelector(),
                     }
                 ),
                 {
                     CONF_SCAN_INTERVAL: DEFAULT_SCAN_INTERVAL,
                     CONF_MAIL_PREVIEW: DEFAULT_MAIL_PREVIEW,
+                    CONF_PANEL: DEFAULT_PANEL,
                     **self.config_entry.options,
                 },
             ),

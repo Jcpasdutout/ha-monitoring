@@ -20,6 +20,8 @@ Chaque sonde devient un **appareil** dans Home Assistant, avec ses capteurs. Qua
 
 **Pour l'ensemble (appareil « Monitoring »)** : nombre de sondes en alerte ou en erreur (avec leur liste), nombre de sondes en erreur, total des mails non lus, un capteur binaire « Problème sur une sonde » et un bouton « Relancer toutes les sondes ».
 
+**Avec l'add-on** : une entrée **Monitoring** dans la barre latérale, à l'adresse courte `https://<votre-home-assistant>/monitoring` (au lieu de `/af026962_monitoring`, imposée par Home Assistant pour les add-ons). C'est la même page que celle de l'add-on ; l'entrée d'origine de l'add-on est masquée pour ne pas apparaître en double.
+
 ## Deux façons de faire tourner le monitoring
 
 Ce dépôt contient aussi un **add-on** Home Assistant (dossier `monitoring/`) : le monitoring tourne alors directement dans Home Assistant, avec son tableau de bord dans la barre latérale. Il faut Home Assistant **OS** ou **Supervised** (les installations « Container » et « Core » n'ont pas d'add-ons). Sinon, gardez le monitoring sur sa propre machine (conteneur Proxmox par exemple) et installez seulement l'intégration ci-dessous.
@@ -71,7 +73,7 @@ Le jeton permet seulement de lire l'état des sondes et de les relancer. Il ne p
 
 Sur la carte de l'intégration (**Paramètres** → **Appareils et services** → **Monitoring**) :
 
-- **Configurer** : fréquence de mise à jour (30 s par défaut ; les sondes gardent leur propre rythme dans le monitoring) et affichage de l'expéditeur et de l'objet des derniers mails.
+- **Configurer** : fréquence de mise à jour (30 s par défaut ; les sondes gardent leur propre rythme dans le monitoring) affichage de l'expéditeur et de l'objet des derniers mails, et (avec l'add-on) le lien **/monitoring** dans la barre latérale. Si vous décochez ce dernier, l'add-on retrouve sa propre entrée.
 - ⋮ → **Reconfigurer** : à utiliser si l'**adresse IP du monitoring change** (son conteneur est en DHCP). Laissez le jeton vide pour garder l'actuel.
 - Si le jeton est supprimé dans le monitoring, Home Assistant affiche une notification **Réauthentification requise** : créez un nouveau jeton et collez-le.
 
@@ -122,6 +124,7 @@ Afficher le tableau de bord complet dans Home Assistant : ajoutez à un tableau 
 - **« Impossible de joindre le monitoring »** : vérifiez l'adresse dans un navigateur depuis le même réseau que Home Assistant.
 - **« Cette adresse ne répond pas comme le monitoring »** : le monitoring n'est pas encore en version 2.1 ; mettez-le à jour.
 - **« Jeton refusé »** : recopiez le jeton en entier, ou créez-en un nouveau.
+- **Pas d'entrée /monitoring** : elle n'existe qu'avec l'add-on (pas pour un monitoring installé sur une autre machine). Vérifiez aussi qu'aucun tableau de bord n'utilise déjà l'adresse `/monitoring`, et videz le cache du navigateur (Ctrl+F5) après la mise à jour.
 - Journaux détaillés : **Paramètres** → **Appareils et services** → **Monitoring** → ⋮ → **Activer la journalisation de débogage**.
 
 ## Développement

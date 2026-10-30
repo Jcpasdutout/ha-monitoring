@@ -57,11 +57,13 @@
         "title": "Monitoring options",
         "data": {
           "scan_interval": "Update interval",
-          "mail_preview": "Show sender and subject of latest mails"
+          "mail_preview": "Show sender and subject of latest mails",
+          "panel": "“Monitoring” sidebar link at /monitoring"
         },
         "data_description": {
           "scan_interval": "How often (in seconds) Home Assistant reads the probe states (probes keep their own schedule in the monitoring app).",
-          "mail_preview": "Adds a “derniers_mails” attribute to unread mail sensors (never stored in history)."
+          "mail_preview": "Adds a “derniers_mails” attribute to unread mail sensors (never stored in history).",
+          "panel": "Add-on only: shows the monitoring at the short address /monitoring and hides the add-on's own sidebar entry so it doesn't appear twice."
         }
       }
     }

@@ -57,11 +57,13 @@
         "title": "Options du monitoring",
         "data": {
           "scan_interval": "Fréquence de mise à jour",
-          "mail_preview": "Afficher l'expéditeur et l'objet des derniers mails"
+          "mail_preview": "Afficher l'expéditeur et l'objet des derniers mails",
+          "panel": "Lien « Monitoring » dans la barre latérale, à l'adresse /monitoring"
         },
         "data_description": {
           "scan_interval": "Toutes les combien de secondes Home Assistant relit l'état des sondes (les sondes gardent leur propre rythme dans le monitoring).",
-          "mail_preview": "Ajoute un attribut « derniers_mails » aux capteurs de mails non lus (jamais enregistré dans l'historique)."
+          "mail_preview": "Ajoute un attribut « derniers_mails » aux capteurs de mails non lus (jamais enregistré dans l'historique).",
+          "panel": "Pour l'add-on uniquement : affiche le monitoring à l'adresse courte /monitoring et masque l'entrée d'origine de l'add-on, pour ne pas l'avoir en double."
         }
       }
     }

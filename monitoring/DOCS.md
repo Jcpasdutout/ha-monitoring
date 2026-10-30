@@ -4,7 +4,7 @@ Le monitoring tourne directement dans Home Assistant : sondes mail IMAP, sites e
 
 ## Premier démarrage
 
-1. Démarrez l'add-on, puis cliquez **Ouvrir l'interface Web** (ou **Monitoring** dans la barre latérale).
+1. Démarrez l'add-on, puis cliquez **Ouvrir l'interface Web** (ou **Monitoring** dans la barre latérale). Avec l'intégration Monitoring (HACS), la page est aussi à l'adresse courte `/monitoring`.
 2. Allez dans **Sondes** et créez le compte administrateur.
 3. Ajoutez vos sondes.
 
