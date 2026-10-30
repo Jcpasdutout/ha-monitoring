@@ -26,6 +26,8 @@ _LOGGER = logging.getLogger(__name__)
 STATIC_URL = f"/{DOMAIN}_static"
 PANEL_JS = "panel.js"
 WEBCOMPONENT = "ha-monitoring-panel"
+# Vue des add-ons de Home Assistant (celle de leurs panneaux), quand elle existe.
+APP_PANEL = "app"
 # Entrée de configuration propriétaire du panneau (il n'y en a qu'un).
 DATA_PANEL_OWNER = f"{DOMAIN}_panel_owner"
 DATA_STATIC = f"{DOMAIN}_static_registered"
@@ -56,6 +58,27 @@ async def _set_addon_panel(hass: HomeAssistant, slug: str, visible: bool) -> Non
         await client.addons.set_addon_options(slug, AddonsOptions(ingress_panel=visible))
 
 
+async def _register_custom_panel(hass: HomeAssistant, slug: str, info) -> None:
+    """Versions plus anciennes de Home Assistant : notre propre vue (frontend/panel.js)."""
+    if not hass.data.get(DATA_STATIC):
+        await hass.http.async_register_static_paths(
+            [StaticPathConfig(STATIC_URL, str(Path(__file__).parent / "frontend"), False)]
+        )
+        hass.data[DATA_STATIC] = True
+    version = (await async_get_integration(hass, DOMAIN)).version
+    await panel_custom.async_register_panel(
+        hass,
+        frontend_url_path=PANEL_URL_PATH,
+        webcomponent_name=WEBCOMPONENT,
+        sidebar_title=info.name or "Monitoring",
+        sidebar_icon=PANEL_ICON,
+        # Le numéro de version force le navigateur à recharger le script après une mise à jour.
+        module_url=f"{STATIC_URL}/{PANEL_JS}?v={version}",
+        config={"slug": slug, "ingress_url": info.ingress_url, "title": info.name},
+        require_admin=True,  # comme le panneau de l'add-on
+    )
+
+
 async def async_setup_panel(hass: HomeAssistant, entry: MonitoringConfigEntry) -> None:
     """Crée le panneau /monitoring si ce monitoring est l'add-on et que l'option est active."""
     slug = addon_slug(entry)
@@ -79,25 +102,22 @@ async def async_setup_panel(hass: HomeAssistant, entry: MonitoringConfigEntry) -
     if owner is not None and owner != entry.entry_id:
         return  # un autre add-on Monitoring a déjà le panneau
 
-    if not hass.data.get(DATA_STATIC):
-        await hass.http.async_register_static_paths(
-            [StaticPathConfig(STATIC_URL, str(Path(__file__).parent / "frontend"), False)]
-        )
-        hass.data[DATA_STATIC] = True
     if owner is None:
-        version = (await async_get_integration(hass, DOMAIN)).version
         try:
-            await panel_custom.async_register_panel(
-                hass,
-                frontend_url_path=PANEL_URL_PATH,
-                webcomponent_name=WEBCOMPONENT,
-                sidebar_title=info.name or "Monitoring",
-                sidebar_icon=PANEL_ICON,
-                # Le numéro de version force le navigateur à recharger le script après une mise à jour.
-                module_url=f"{STATIC_URL}/{PANEL_JS}?v={version}",
-                config={"slug": slug, "ingress_url": info.ingress_url, "title": info.name},
-                require_admin=True,  # comme le panneau de l'add-on
-            )
+            if APP_PANEL in hass.data.get(frontend.DATA_PANELS, {}):
+                # Home Assistant récent : on réutilise sa propre vue des add-ons (bandeau et
+                # bouton du menu quand la barre latérale est masquée, écran de chargement...).
+                frontend.async_register_built_in_panel(
+                    hass,
+                    APP_PANEL,
+                    frontend_url_path=PANEL_URL_PATH,
+                    sidebar_title=info.name or "Monitoring",
+                    sidebar_icon=PANEL_ICON,
+                    require_admin=True,  # comme le panneau de l'add-on
+                    config={"addon": slug},
+                )
+            else:
+                await _register_custom_panel(hass, slug, info)
         except ValueError as err:
             # Une autre page occupe déjà /monitoring (tableau de bord du même nom, par exemple).
             _LOGGER.warning("Panneau /%s non créé : %s", PANEL_URL_PATH, err)

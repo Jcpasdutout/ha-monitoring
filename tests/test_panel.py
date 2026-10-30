@@ -7,6 +7,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
+from homeassistant.components import frontend
 from homeassistant.components.frontend import DATA_PANELS
 from homeassistant.const import CONF_TOKEN, CONF_URL
 from homeassistant.core import HomeAssistant
@@ -79,6 +80,16 @@ async def test_panel_created(hass: HomeAssistant, addon_api, supervisor) -> None
 
     await hass.config_entries.async_remove(entry.entry_id)
     assert supervisor.ingress_panel is True
+
+
+async def test_app_panel(hass: HomeAssistant, addon_api, supervisor) -> None:
+    """HA récent : le panneau réutilise la vue des add-ons de Home Assistant."""
+    frontend.async_register_built_in_panel(hass, "app")
+    await _setup(hass, _addon_entry())
+    panel = hass.data[DATA_PANELS]["monitoring"]
+    assert panel.component_name == "app"
+    assert panel.config == {"addon": SLUG}
+    assert supervisor.ingress_panel is False
 
 
 async def test_panel_disabled(hass: HomeAssistant, addon_api, supervisor) -> None:
