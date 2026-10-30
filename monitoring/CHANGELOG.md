@@ -1,5 +1,9 @@
 # Journal des modifications
 
+## 2.9.0
+
+- Le choix du thème passe dans le menu roue crantée : Sombre, Clair, Image ou Transparent. La galerie d'images n'apparaît qu'en mode Image, et recliquer sur l'image choisie bascule entre sa version claire et sa version sombre.
+
 ## 2.8.0
 
 - Image de fond au choix dans le menu roue crantée : sept fonds intégrés (clairs et sombres) ou ta propre image, avec un voile réglable et des cartes en verre dépoli. En mode transparent, le fond du thème Home Assistant reste affiché sauf si « Garder l'image en mode transparent » est coché.
