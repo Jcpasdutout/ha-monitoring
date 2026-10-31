@@ -1,5 +1,9 @@
 # Journal des modifications
 
+## 2.10.0
+
+- Menu administrateur : **Exporter les sondes** (fichier JSON, historique en option) et **Importer une sauvegarde** (ajouter aux sondes actuelles ou les remplacer). Pratique pour passer du conteneur Proxmox à l'add-on, ou l'inverse. Le fichier contient les mots de passe des sondes : gardez-le en lieu sûr.
+
 ## 2.9.2
 
 - Dans Home Assistant, la page Sondes n'affiche plus d'ascenseurs inutiles (les interrupteurs « Active » débordaient de la page).
