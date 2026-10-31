@@ -1,5 +1,9 @@
 # Journal des modifications
 
+## 2.10.1
+
+- Dans Home Assistant, les fenêtres ouvertes depuis le menu (Exporter, Importer, Jetons d'accès, mot de passe) s'affichent au centre de l'écran au lieu de rester cachées dans le menu flottant.
+
 ## 2.10.0
 
 - Menu administrateur : **Exporter les sondes** (fichier JSON, historique en option) et **Importer une sauvegarde** (ajouter aux sondes actuelles ou les remplacer). Pratique pour passer du conteneur Proxmox à l'add-on, ou l'inverse. Le fichier contient les mots de passe des sondes : gardez-le en lieu sûr.
