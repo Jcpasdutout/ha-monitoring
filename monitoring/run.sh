@@ -8,6 +8,11 @@ OPTIONS=/data/options.json
 if [ ! -f /data/monitoring.db ] && [ -f /share/monitoring/monitoring.db ]; then
   echo "Reprise de la base /share/monitoring/monitoring.db"
   cp /share/monitoring/monitoring.db /data/monitoring.db
+  # Clé de chiffrement des mots de passe de cette base (monitoring 2.11 et plus).
+  if [ ! -f /data/secret.key ] && [ -f /share/monitoring/secret.key ]; then
+    cp /share/monitoring/secret.key /data/secret.key
+    chmod 600 /data/secret.key
+  fi
 fi
 
 ARGS=""
@@ -16,6 +21,8 @@ if [ -f "$OPTIONS" ] && python3 -c "import json,sys; sys.exit(0 if json.load(ope
   ARGS="--reset-admin"
 fi
 
+# Clé qui chiffre les mots de passe des sondes, créée au premier démarrage.
+export MONITORING_KEY_FILE=/data/secret.key
 export MONITORING_DATA=/data MONITORING_HOST=0.0.0.0 MONITORING_PORT=8080
 # Jeton réservé à l'intégration Home Assistant, transmis par la découverte (discovery.py).
 export MONITORING_TOKEN_FILE=/data/ha_token MONITORING_TOKEN_NAME="Home Assistant (add-on)"

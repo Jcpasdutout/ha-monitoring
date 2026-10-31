@@ -1,5 +1,10 @@
 # Journal des modifications
 
+## 2.11.0
+
+- Les mots de passe des sondes sont **chiffrés** dans la base, avec une clé créée automatiquement au premier démarrage (`/data/secret.key`, à part de la base). Les mots de passe existants sont chiffrés tout seuls à la mise à jour.
+- Export : les mots de passe des sondes ne sont inclus que si tu choisis un **mot de passe d'export** ; ils sont chiffrés avec lui et l'import le redemande. Les fichiers exportés en 2.10 s'importent toujours.
+
 ## 2.10.1
 
 - Dans Home Assistant, les fenêtres ouvertes depuis le menu (Exporter, Importer, Jetons d'accès, mot de passe) s'affichent au centre de l'écran au lieu de rester cachées dans le menu flottant.
