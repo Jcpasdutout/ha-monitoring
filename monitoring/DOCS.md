@@ -8,14 +8,16 @@ Le monitoring tourne directement dans Home Assistant : sondes mail IMAP, sites e
 2. Allez dans **Sondes** et créez le compte administrateur.
 3. Ajoutez vos sondes.
 
-Les sondes, mots de passe et l'historique sont dans le dossier `/data` de l'add-on : ils sont conservés lors des mises à jour et inclus dans les sauvegardes de Home Assistant.
+Les sondes, mots de passe et l'historique sont dans le dossier `/data` de l'add-on : ils sont conservés lors des mises à jour et inclus dans les sauvegardes de Home Assistant. Les mots de passe des sondes y sont chiffrés avec une clé créée au premier démarrage (`/data/secret.key`).
+
+Le plus simple pour reprendre les sondes d'une autre installation est **Exporter les sondes** (menu administrateur) là-bas, avec un mot de passe d'export, puis **Importer une sauvegarde** ici.
 
 ## Reprendre les sondes d'une autre installation
 
 Pour retrouver les sondes d'un monitoring existant (par exemple un conteneur Proxmox) :
 
 1. Arrêtez l'ancien monitoring et récupérez son fichier `monitoring.db` (sous Proxmox : `/var/lib/monitoring/monitoring.db`).
-2. Déposez-le dans le dossier `share/monitoring/` de Home Assistant (avec l'add-on **Samba share** ou **Studio Code Server**).
+2. Déposez-le dans le dossier `share/monitoring/` de Home Assistant (avec l'add-on **Samba share** ou **Studio Code Server**), avec sa clé `secret.key` (sous Proxmox : `/etc/monitoring/secret.key`) : sans elle, les mots de passe des sondes seront à ressaisir.
 3. Démarrez l'add-on. La base n'est reprise que si l'add-on n'en a pas encore : déposez donc le fichier **avant le premier démarrage**. Si l'add-on a déjà démarré, désinstallez-le puis réinstallez-le (ce qui efface les sondes créées entre-temps).
 
 Le compte administrateur et les jetons d'accès sont repris avec.
